@@ -1,0 +1,37 @@
+{
+    "name": "bug-free-carnival",
+    "version": "0.0.0",
+    "description": "",
+    "main": "truffle-config.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "update": "ncu -u --timeout 1800000 && npm i --legacy-peer-deps"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/itsprofcjs/bug-free-carnival.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/itsprofcjs/bug-free-carnival/issues"
+    },
+    "homepage": "https://github.com/itsprofcjs/bug-free-carnival#readme",
+    "devDependencies": {
+        "@semantic-release/changelog": "6.0.1",
+        "@semantic-release/git": "10.0.1",
+        "bootstrap": "5.1.3",
+        "chai": "^4.3.6",
+        "chai-as-promised": "^7.1.1",
+        "chai-bignumber": "^3.0.0",
+        "lite-server": "^2.6.1",
+        "nodemon": "^2.0.16",
+        "semantic-release": "^19.0.2",
+        "truffle": "5.5.12",
+        "truffle-contract": "3.0.6"
+    }
+}
