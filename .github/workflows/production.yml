@@ -15,8 +15,6 @@ on:
             - main
 
 env:
-    GCE_INSTANCE: ${{ secrets.GCE_INSTANCE }}
-    GCE_INSTANCE_ZONE: ${{ secrets.GCE_INSTANCE_ZONE }}
     GIT_AUTHOR_NAME: ${{ secrets.GIT_AUTHOR_NAME }}
     GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
     GIT_COMMITTER_NAME: ${{ secrets.GIT_COMMITTER_NAME }}
@@ -38,7 +36,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v1
               with:
-                  node-version: '14'
+                  node-version: '16'
 
             # Runs a single command using the runners shell
             - name: Installing dependencies via npm install
@@ -54,28 +52,3 @@ jobs:
             - run: echo "$OUTPUTS"
               env:
                   OUTPUTS: ${{ toJson(steps.semantic.outputs) }}
-
-            # Runs a set of commands using the runners shell
-            - name: Building project
-              if: steps.semantic.outputs.new-release-published == 'true'
-              run: REACT_APP_VERSION=$RELEASE_VERSION npm run build
-
-            - name: zipping the build
-              if: steps.semantic.outputs.new-release-published == 'true'
-              run: tar -cjf website.tar.bz2 ./build
-
-            - name: GCloud Setup
-              if: steps.semantic.outputs.new-release-published == 'true'
-              uses: google-github-actions/setup-gcloud@master
-              with:
-                  version: '305.0.0'
-                  service_account_key: ${{ secrets.GCE_SA_KEY }}
-                  project_id: ${{ secrets.GCE_PROJECT }}
-
-            - name: Copying tar file to Gcloud
-              if: steps.semantic.outputs.new-release-published == 'true'
-              run: gcloud compute scp website.tar.bz2 $GCE_INSTANCE:~/deployments --zone=$GCE_INSTANCE_ZONE
-
-            - name: Running Deployment Script
-              if: steps.semantic.outputs.new-release-published == 'true'
-              run: gcloud compute ssh $GCE_INSTANCE --zone=$GCE_INSTANCE_ZONE --command 'cd deployments && sudo sh deploy-site.sh'
