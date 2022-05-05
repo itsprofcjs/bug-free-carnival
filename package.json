@@ -7,6 +7,7 @@
         "test": "test"
     },
     "scripts": {
+        "dev": "lite-server",
         "test": "echo \"Error: no test specified\" && exit 1",
         "update": "ncu -u --timeout 1800000 && npm i --legacy-peer-deps"
     },
