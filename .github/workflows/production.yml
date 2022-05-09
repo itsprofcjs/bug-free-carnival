@@ -31,20 +31,21 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Setup Node
-              uses: actions/setup-node@v1
+              uses: actions/setup-node@v3
               with:
-                  node-version: '16'
+                  node-version: '18'
+                  cache: 'npm'
 
             # Runs a single command using the runners shell
             - name: Installing dependencies via npm install
-              run: npm install
+              run: npm install --legacy-peer-deps
 
             - name: Semantic Release
               id: semantic
-              uses: docker://codfish/semantic-release-action:v1
+              uses: cycjimmy/semantic-release-action@v3
               # if: github.event_name == 'push'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
