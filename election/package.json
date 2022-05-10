@@ -1,0 +1,19 @@
+{
+    "name": "pet-shop",
+    "version": "1.0.0",
+    "description": "",
+    "main": "truffle.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "start": "lite-server",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "update": "ncu -u --timeout 1800000 && npm i --legacy-peer-deps"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "lite-server": "^2.6.1"
+    }
+}
